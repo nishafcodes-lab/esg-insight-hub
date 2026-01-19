@@ -6,6 +6,7 @@ import { StatCard } from '@/components/StatCard';
 import { SupplierTable } from '@/components/SupplierTable';
 import { SupplierFilters } from '@/components/SupplierFilters';
 import { DashboardCharts } from '@/components/DashboardCharts';
+import { ExportDropdown } from '@/components/ExportDropdown';
 import { Button } from '@/components/ui/button';
 import { mockSuppliers, getDashboardStats } from '@/data/mockData';
 import { RiskLevel, Supplier } from '@/types/supplier';
@@ -51,10 +52,13 @@ export default function Dashboard() {
               Monitor and evaluate supplier ESG compliance and risk levels
             </p>
           </div>
-          <Button onClick={() => navigate('/supplier/new')} className="gap-2">
-            <Plus className="w-4 h-4" />
-            Add Supplier
-          </Button>
+          <div className="flex items-center gap-2">
+            <ExportDropdown suppliers={filteredSuppliers} />
+            <Button onClick={() => navigate('/supplier/new')} className="gap-2">
+              <Plus className="w-4 h-4" />
+              Add Supplier
+            </Button>
+          </div>
         </div>
 
         {/* Stats Cards */}
