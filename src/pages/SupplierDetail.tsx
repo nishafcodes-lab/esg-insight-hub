@@ -1,5 +1,5 @@
 import { useParams, useNavigate } from 'react-router-dom';
-import { ArrowLeft, Edit, FileText, Download, Calendar, MapPin, Tag, Upload } from 'lucide-react';
+import { ArrowLeft, Edit, FileText, Download, Calendar, MapPin, Tag, Upload, FileDown } from 'lucide-react';
 import { Layout } from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { RiskBadge } from '@/components/RiskBadge';
@@ -7,6 +7,8 @@ import { ESGScoreCircle } from '@/components/ESGScoreCircle';
 import { ESGBreakdown } from '@/components/ESGBreakdown';
 import { DocumentUpload } from '@/components/DocumentUpload';
 import { mockSuppliers } from '@/data/mockData';
+import { exportSupplierReport } from '@/utils/exportUtils';
+import { toast } from '@/hooks/use-toast';
 import { useState } from 'react';
 import {
   Dialog,
@@ -77,10 +79,25 @@ export default function SupplierDetail() {
               </div>
             </div>
           </div>
-          <Button variant="outline" onClick={() => navigate(`/supplier/edit/${supplier.id}`)}>
-            <Edit className="w-4 h-4 mr-2" />
-            Edit Supplier
-          </Button>
+          <div className="flex items-center gap-2">
+            <Button 
+              variant="outline" 
+              onClick={() => {
+                exportSupplierReport(supplier);
+                toast({
+                  title: 'Report generated',
+                  description: `ESG report for ${supplier.name} has been downloaded.`,
+                });
+              }}
+            >
+              <FileDown className="w-4 h-4 mr-2" />
+              Export Report
+            </Button>
+            <Button variant="outline" onClick={() => navigate(`/supplier/edit/${supplier.id}`)}>
+              <Edit className="w-4 h-4 mr-2" />
+              Edit Supplier
+            </Button>
+          </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
