@@ -2,95 +2,114 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
+/* ESG Dashboard Design System */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base colors - Professional slate/navy theme */
+    --background: 210 20% 98%;
+    --foreground: 222 47% 11%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 222 47% 11%;
 
-    --primary: 222.2 47.4% 11.2%;
+    /* Primary - Deep navy blue */
+    --primary: 222 47% 20%;
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Soft gray */
+    --secondary: 210 20% 96%;
+    --secondary-foreground: 222 47% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210 20% 96%;
+    --muted-foreground: 215 16% 47%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Teal for interactive elements */
+    --accent: 173 58% 39%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 47% 20%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
+    /* Risk Level Colors */
+    --risk-low: 142 71% 45%;
+    --risk-low-foreground: 0 0% 100%;
+    --risk-low-bg: 142 76% 95%;
+    
+    --risk-medium: 38 92% 50%;
+    --risk-medium-foreground: 0 0% 100%;
+    --risk-medium-bg: 38 100% 95%;
+    
+    --risk-high: 0 84% 60%;
+    --risk-high-foreground: 0 0% 100%;
+    --risk-high-bg: 0 93% 96%;
 
-    --sidebar-foreground: 240 5.3% 26.1%;
+    /* ESG Category Colors */
+    --esg-environmental: 152 69% 41%;
+    --esg-social: 217 91% 60%;
+    --esg-governance: 271 76% 53%;
 
-    --sidebar-primary: 240 5.9% 10%;
+    /* Chart colors */
+    --chart-1: 142 71% 45%;
+    --chart-2: 38 92% 50%;
+    --chart-3: 0 84% 60%;
+    --chart-4: 217 91% 60%;
+    --chart-5: 271 76% 53%;
 
-    --sidebar-primary-foreground: 0 0% 98%;
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsl(222 47% 11% / 0.05);
+    --shadow-md: 0 4px 6px -1px hsl(222 47% 11% / 0.1), 0 2px 4px -2px hsl(222 47% 11% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(222 47% 11% / 0.1), 0 4px 6px -4px hsl(222 47% 11% / 0.1);
+    --shadow-card: 0 1px 3px 0 hsl(222 47% 11% / 0.1), 0 1px 2px -1px hsl(222 47% 11% / 0.1);
 
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Sidebar */
+    --sidebar-background: 222 47% 11%;
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 173 58% 39%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 222 47% 20%;
+    --sidebar-accent-foreground: 210 20% 90%;
+    --sidebar-border: 222 47% 20%;
+    --sidebar-ring: 173 58% 39%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
+    --background: 222 47% 8%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 222 47% 11%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222.2 84% 4.9%;
+    --popover: 222 47% 11%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary: 173 58% 50%;
+    --primary-foreground: 222 47% 11%;
 
-    --secondary: 217.2 32.6% 17.5%;
+    --secondary: 222 47% 15%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 222 47% 15%;
+    --muted-foreground: 215 20% 65%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 173 58% 39%;
+    --accent-foreground: 0 0% 100%;
 
-    --destructive: 0 62.8% 30.6%;
+    --destructive: 0 63% 31%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --border: 222 47% 20%;
+    --input: 222 47% 20%;
+    --ring: 173 58% 50%;
   }
 }
 
@@ -100,6 +119,172 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+}
+
+@layer components {
+  /* Card styles */
+  .card-elevated {
+    @apply bg-card rounded-lg border border-border;
+    box-shadow: var(--shadow-card);
+  }
+
+  .card-elevated:hover {
+    box-shadow: var(--shadow-md);
+  }
+
+  /* Stat card styles */
+  .stat-card {
+    @apply card-elevated p-6 transition-all duration-200;
+  }
+
+  .stat-card:hover {
+    @apply -translate-y-0.5;
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Risk badges */
+  .badge-risk-low {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+    background-color: hsl(var(--risk-low-bg));
+    color: hsl(var(--risk-low));
+  }
+
+  .badge-risk-medium {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+    background-color: hsl(var(--risk-medium-bg));
+    color: hsl(142 76% 25%);
+  }
+
+  .badge-risk-high {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium;
+    background-color: hsl(var(--risk-high-bg));
+    color: hsl(var(--risk-high));
+  }
+
+  /* Table styles */
+  .data-table {
+    @apply w-full text-sm;
+  }
+
+  .data-table th {
+    @apply text-left font-medium text-muted-foreground py-3 px-4 border-b border-border;
+  }
+
+  .data-table td {
+    @apply py-4 px-4 border-b border-border;
+  }
+
+  .data-table tbody tr {
+    @apply transition-colors hover:bg-muted/50;
+  }
+
+  /* ESG Score circle */
+  .esg-score-circle {
+    @apply relative flex items-center justify-center rounded-full;
+    background: conic-gradient(
+      hsl(var(--accent)) calc(var(--score) * 1%),
+      hsl(var(--muted)) 0
+    );
+  }
+
+  .esg-score-circle::before {
+    @apply content-[''] absolute bg-card rounded-full;
+    width: calc(100% - 12px);
+    height: calc(100% - 12px);
+  }
+
+  /* Upload zone */
+  .upload-zone {
+    @apply border-2 border-dashed border-border rounded-lg p-8 text-center transition-all duration-200;
+    @apply hover:border-accent hover:bg-accent/5;
+  }
+
+  .upload-zone.dragover {
+    @apply border-accent bg-accent/10;
+  }
+
+  /* ESG breakdown item */
+  .esg-item {
+    @apply flex items-center justify-between py-3 px-4 rounded-lg transition-colors;
+    @apply hover:bg-muted/50;
+  }
+
+  .esg-item-check {
+    @apply w-5 h-5 rounded-full flex items-center justify-center text-xs font-medium;
+  }
+
+  .esg-item-check.passed {
+    @apply bg-risk-low/10 text-risk-low;
+    background-color: hsl(var(--risk-low-bg));
+    color: hsl(var(--risk-low));
+  }
+
+  .esg-item-check.failed {
+    @apply bg-risk-high/10 text-risk-high;
+    background-color: hsl(var(--risk-high-bg));
+    color: hsl(var(--risk-high));
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Risk level utilities */
+  .bg-risk-low {
+    background-color: hsl(var(--risk-low));
+  }
+
+  .bg-risk-medium {
+    background-color: hsl(var(--risk-medium));
+  }
+
+  .bg-risk-high {
+    background-color: hsl(var(--risk-high));
+  }
+
+  .text-risk-low {
+    color: hsl(var(--risk-low));
+  }
+
+  .text-risk-medium {
+    color: hsl(var(--risk-medium));
+  }
+
+  .text-risk-high {
+    color: hsl(var(--risk-high));
+  }
+
+  /* Animation utilities */
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.4s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to { 
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
