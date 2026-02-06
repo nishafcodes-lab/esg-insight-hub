@@ -1,4 +1,5 @@
-import { Search, Filter, X } from 'lucide-react';
+import { Search, Filter, X, CalendarIcon } from 'lucide-react';
+import { format } from 'date-fns';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -8,8 +9,20 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { Calendar } from '@/components/ui/calendar';
+import { cn } from '@/lib/utils';
 import { RiskLevel } from '@/types/supplier';
 import { countries } from '@/data/mockData';
+
+export interface DateRange {
+  from: Date | undefined;
+  to: Date | undefined;
+}
 
 interface SupplierFiltersProps {
   searchQuery: string;
@@ -18,6 +31,8 @@ interface SupplierFiltersProps {
   onRiskFilterChange: (value: RiskLevel | 'all') => void;
   countryFilter: string;
   onCountryFilterChange: (value: string) => void;
+  dateRange: DateRange;
+  onDateRangeChange: (range: DateRange) => void;
   onClearFilters: () => void;
   hasActiveFilters: boolean;
 }
@@ -29,9 +44,16 @@ export function SupplierFilters({
   onRiskFilterChange,
   countryFilter,
   onCountryFilterChange,
+  dateRange,
+  onDateRangeChange,
   onClearFilters,
   hasActiveFilters,
 }: SupplierFiltersProps) {
+  const dateLabel = dateRange.from
+    ? dateRange.to
+      ? `${format(dateRange.from, 'MMM d')} – ${format(dateRange.to, 'MMM d')}`
+      : format(dateRange.from, 'MMM d, yyyy')
+    : null;
   return (
     <div className="flex flex-col sm:flex-row gap-3">
       {/* Search Input */}
@@ -90,6 +112,34 @@ export function SupplierFilters({
           ))}
         </SelectContent>
       </Select>
+
+      {/* Date Range Filter */}
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            className={cn(
+              'w-full sm:w-[220px] justify-start text-left font-normal',
+              !dateRange.from && 'text-muted-foreground'
+            )}
+          >
+            <CalendarIcon className="w-4 h-4 mr-2" />
+            {dateLabel ?? 'Filter by date'}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar
+            mode="range"
+            selected={dateRange.from ? { from: dateRange.from, to: dateRange.to } : undefined}
+            onSelect={(range) =>
+              onDateRangeChange({ from: range?.from, to: range?.to })
+            }
+            numberOfMonths={2}
+            initialFocus
+            className={cn('p-3 pointer-events-auto')}
+          />
+        </PopoverContent>
+      </Popover>
 
       {/* Clear Filters */}
       {hasActiveFilters && (
