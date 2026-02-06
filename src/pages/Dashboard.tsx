@@ -4,7 +4,7 @@ import { Building2, AlertTriangle, AlertCircle, CheckCircle, Plus } from 'lucide
 import { Layout } from '@/components/Layout';
 import { StatCard } from '@/components/StatCard';
 import { SupplierTable } from '@/components/SupplierTable';
-import { SupplierFilters } from '@/components/SupplierFilters';
+import { SupplierFilters, DateRange } from '@/components/SupplierFilters';
 import { DashboardCharts } from '@/components/DashboardCharts';
 import { ExportDropdown } from '@/components/ExportDropdown';
 import { Button } from '@/components/ui/button';
@@ -16,6 +16,7 @@ export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState('');
   const [riskFilter, setRiskFilter] = useState<RiskLevel | 'all'>('all');
   const [countryFilter, setCountryFilter] = useState('all');
+  const [dateRange, setDateRange] = useState<DateRange>({ from: undefined, to: undefined });
 
   const stats = useMemo(() => getDashboardStats(mockSuppliers), []);
 
@@ -24,17 +25,29 @@ export default function Dashboard() {
       const matchesSearch = supplier.name.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesRisk = riskFilter === 'all' || supplier.riskLevel === riskFilter;
       const matchesCountry = countryFilter === 'all' || supplier.country === countryFilter;
-      
-      return matchesSearch && matchesRisk && matchesCountry;
-    });
-  }, [searchQuery, riskFilter, countryFilter]);
 
-  const hasActiveFilters = searchQuery !== '' || riskFilter !== 'all' || countryFilter !== 'all';
+      let matchesDate = true;
+      if (dateRange.from) {
+        const updatedAt = new Date(supplier.updatedAt);
+        matchesDate = updatedAt >= dateRange.from;
+        if (dateRange.to) {
+          const endOfDay = new Date(dateRange.to);
+          endOfDay.setHours(23, 59, 59, 999);
+          matchesDate = matchesDate && updatedAt <= endOfDay;
+        }
+      }
+
+      return matchesSearch && matchesRisk && matchesCountry && matchesDate;
+    });
+  }, [searchQuery, riskFilter, countryFilter, dateRange]);
+
+  const hasActiveFilters = searchQuery !== '' || riskFilter !== 'all' || countryFilter !== 'all' || !!dateRange.from;
 
   const clearFilters = () => {
     setSearchQuery('');
     setRiskFilter('all');
     setCountryFilter('all');
+    setDateRange({ from: undefined, to: undefined });
   };
 
   const handleEditSupplier = (supplier: Supplier) => {
@@ -109,6 +122,8 @@ export default function Dashboard() {
                 onRiskFilterChange={setRiskFilter}
                 countryFilter={countryFilter}
                 onCountryFilterChange={setCountryFilter}
+                dateRange={dateRange}
+                onDateRangeChange={setDateRange}
                 onClearFilters={clearFilters}
                 hasActiveFilters={hasActiveFilters}
               />
